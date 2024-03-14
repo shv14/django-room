@@ -1,0 +1,74 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    .login-page {
+        margin: auto;
+        max-width: 612px;
+    }
+
+    .login-page .form .login {
+        padding: 20px 0px;
+    }
+
+    .form {
+        position: relative;
+        text-align: center;
+        /* background: #FFFFFF; */
+        background-color: #272640;
+        color: white;
+        max-width: fit-content;
+        margin: 0 auto 100px;
+        padding: 45px;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+
+    .form input {
+        outline: 0;
+        background: #f2f2f2;
+        width: 100%;
+        border: 0;
+        margin: 0 0 15px;
+        padding: 15px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+    .form .message {
+        margin: 15px 0 0;
+        color: #b3b3b3;
+        font-size: 12px;
+    }
+
+    .form .message a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .form .message a:hover {
+        color: wheat;
+    }
+
+    .form .btn {
+        width: 40%;
+    }
+</style>
+<div class="login-page">
+    <div class="form">
+        <div class="login">
+            <div class="login-header">
+                <h3>Delete</h3>
+                <!-- <p>Are u sure u want to delete "{{obj}}"</p> -->
+            </div>
+        </div>
+        <form class="login-form" method="POST">
+            {% csrf_token %}
+            <p>Are you sure you want to delete the room "{{obj}}"</p>
+            <!-- <a href="{{request.META.HTTP_REFERER}}">Go back</a> -->
+            <input class="btn bt-lg bg-dark text-light rounded-pill my-2" type="submit" role="button" value="Delete">
+        </form>
+        <p class="message"><a href="{{request.META.HTTP_REFERER}}">Cancel</a></p>
+    </div>
+</div>
+{% endblock %}

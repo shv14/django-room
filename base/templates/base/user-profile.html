@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+    .home-container {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+        margin-bottom: 10px;
+    }
+
+    .home-activity {
+        margin-right: 10px;
+    }
+
+    .home-topic {
+        margin-left: 10px;
+        border-radius: 8px;
+        /* background: gray; */
+    }
+
+    @media (max-width: 991px) {
+        .home-activity {
+            display: none;
+        }
+
+        .home-topic {
+            display: none;
+        }
+
+        .home-container {
+            display: flex;
+        }
+
+        .profile-header{
+            margin: auto;
+            width: fit-content;
+            text-align: center;
+        }
+    }
+</style>
+<!-- <h1>Hello {{request.user}}</h1> -->
+<div class="home-container">
+    <div class="home-topic">
+        {% include 'base/topic-component.html' %}
+    </div>
+
+    <div class="mx-3">
+        {% include 'base/profile-component.html' %}
+    </div>
+
+    <div class="home-activity">
+        {% include 'base/activity-component.html' %}
+    </div>
+</div>
+
+{% endblock %}

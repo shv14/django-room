@@ -1,0 +1,65 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    .about-container {
+        color: white;
+        margin: 50px;
+        text-align: justify;
+    }
+    
+    .about-content {
+        background-color: #272640;
+        border-radius: 8px;
+        padding: 26px;
+    }
+
+    .about-content a{
+        color: wheat;
+        display: inline;
+        text-decoration: none;
+    }
+    
+    @media (max-width: 768px) {
+        
+        .about-container {
+            text-align: center;
+        }
+
+    }
+</style>
+<div class="about-container">
+    <div class="about-content">
+        Welcome to <a href="{% url 'home' %}">NexusNode</a>, a vibrant online community where users can engage in discussions, share content, and
+        connect with like-minded individuals. Inspired by the spirit of community-driven platforms like Reddit, our
+        website
+        aims to provide a platform for users to explore a diverse range of topics, express their thoughts, and discover
+        new
+        perspectives.
+
+        At NexusNode, we believe in the power of conversation to foster understanding, spark creativity, and build
+        connections. Whether you're passionate about technology, politics, art, or any other topic under the sun, you'll
+        find a welcoming community of users eager to engage in meaningful discussions.
+
+        Our platform is designed to be intuitive and user-friendly, allowing you to easily navigate through different
+        topics, join discussions, and contribute your own content. From text posts and links to images and videos,
+        there's
+        no shortage of ways to share your ideas and experiences with the world.
+
+        One of the defining features of NexusNode is our commitment to fostering a respectful and inclusive
+        community.
+        We believe that everyone deserves to have their voice heard, and we encourage all users to engage in
+        constructive
+        dialogue while respecting differing opinions and perspectives.
+
+        Whether you're here to share your expertise, learn something new, or simply connect with others who share your
+        interests, we hope you'll find NexusNode to be a valuable and enriching community. Thank you for being a
+        part
+        of our journey, and we look forward to seeing the conversations and connections that unfold on our platform.
+
+        Join us today and become a part of the NexusNode community!
+    </div>
+</div>
+
+{% endblock %}

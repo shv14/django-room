@@ -1,0 +1,185 @@
+{% load static %}
+
+<style>
+    #image {
+        width: 30px;
+        height: 30px;
+    }
+
+    .user-content {
+        align-items: center;
+    }
+
+    .user-content a {
+        font-size: 1rem;
+        margin: 5px;
+        text-decoration: none;
+        color: teal;
+    }
+
+    .profile-header .user-image img {
+        object-fit: cover;
+        margin: auto;
+        width: 100px;
+        height: 100px;
+        border: 1px solid wheat;
+        border-radius: 50%;
+    }
+
+    .room-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .room-content a {
+        font-size: 1.3rem;
+        text-decoration: none;
+        color: black;
+    }
+
+    .room-content a:hover {
+        color: wheat;
+    }
+
+    .room {
+        border-radius: 8px;
+        padding: 5px;
+        background: whitesmoke;
+    }
+
+    .room-footer {
+        margin: 10px 0px;
+    }
+
+    .room-footer img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .room-footer p {
+        align-self: center;
+        margin: 0;
+    }
+
+    .room-header span {
+        font-size: small;
+    }
+
+    .profile {
+        padding: 12px;
+        /* background-color: gray; */
+        background-color: #272640;
+        border-radius: 8px;
+    }
+
+    .profile-header img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-header {
+        color: white;
+        margin: auto;
+        width: 360px;
+        text-align: center;
+    }
+
+    .user-details {
+        margin-bottom: 7px;
+    }
+
+    .user-details p {
+        margin: 2px;
+    }
+
+    .user-details a {
+        color: wheat;
+    }
+
+    .edit-profile {
+        color: white;
+        margin: 20px;
+    }
+
+    .edit-profile a {
+        margin: 5px;
+        /* border: 2px solid teal;
+        color: black; */
+        border: 2px solid wheat;
+        color: wheat;
+        padding: 10px;
+        border-radius: 50px;
+        text-decoration: none;
+    }
+
+    /* .edit-profile a:hover {
+        color: wheat;
+    } */
+
+    .user-room p {
+        font-size: 1.5rem;
+        margin: 0;
+        font-weight: 500;
+    }
+
+    .profile-content {
+        padding: 12px;
+        /* background-color: gray; */
+        background-color: #272640;
+    }
+
+    .user-about {
+        color: white;
+    }
+    
+    .user-about h3{
+        color: wheat;
+    }
+
+    @media (max-width: 991px) {
+        .profile-header {
+            margin: auto;
+            width: fit-content;
+            text-align: center;
+        }
+    }
+</style>
+
+<div>
+    <div class="profile">
+        <div class="profile-content">
+            <div class="profile-header">
+                <div class="user-image">
+                    <img src="{{users.avatar.url}}" alt="">
+                </div>
+                <div class="user-details">
+                    <p>{{users.name}}</p>
+                    <p>{{users.bio}}</p>
+                    <!-- <p>{{users.first_name}} {{users.last_name}}</p> -->
+                    <a href="">@{{users.username}}</a>
+                </div>
+                {% if request.user == users %}
+                <div class="edit-profile">
+                    <a href="{% url 'update-user' %}">Edit Profile</a>
+                </div>
+                {% endif %}
+            </div>
+            <hr>
+            <div class="my-4">
+                <div class="user-about">
+                    <h3>About</h3>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi eius at laudantium nulla placeat
+                        perspiciatis provident libero iusto fugiat animi.</p>
+                </div>
+            </div>
+            <!-- <div class="user-room d-flex my-0 justify-content-between">
+                <p>Rooms hosted by {{users.username}}</p>
+                <a href="{% url 'create-room' %}"><img id="image" src="{% static 'images/plus.png' %}" alt=""></a>
+            </div> -->
+        </div>
+        <div>
+            {% include 'base/feed-component.html' %}
+        </div>
+    </div>
+</div>

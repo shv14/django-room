@@ -1,0 +1,117 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    .login-page {
+        max-width: 612px;
+        margin: auto;
+    }
+
+    .login-page .form .login {
+        padding: 20px 0px;
+    }
+
+    .form {
+        position: relative;
+        text-align: center;
+        /* background: #FFFFFF; */
+        background: #272640;
+        color: white;
+        margin: 0 auto 100px;
+        padding: 45px;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+
+    .form input {
+        outline: 0;
+        /* background: #f2f2f2; */
+        background-color: #1b3a4b;
+        color: white;
+        width: 100%;
+        border: 0;
+        margin: 0 0 15px;
+        padding: 15px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+    .form .message {
+        margin: 15px 0 0;
+        color: #b3b3b3;
+        font-size: 12px;
+    }
+
+    .form .message a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .form .message a:hover {
+        color: wheat;
+    }
+
+    .form .btn {
+        width: 40%;
+    }
+
+    .login-form label {
+        width: 100%;
+        text-align: left;
+        padding: 5px;
+    }
+
+    #id_description {
+        outline: 0;
+        /* background: #f2f2f2; */
+        background-color: #1b3a4b;
+        color: white;
+        width: 100%;
+        border: 0;
+        margin: 0 0 15px;
+        padding: 15px;
+        box-sizing: border-box;
+        font-size: 14px;
+        height: 150px;
+        resize: none;
+    }
+</style>
+<div class="login-page">
+    <div class="form">
+        <div class="login">
+            <div class="login-header">
+                {% if page == 'create' %}
+                <h3>Create Room</h3>
+                {% else %}
+                <h3>Update Room</h3>
+                {% endif %}
+            </div>
+        </div>
+        <form class="login-form" method="POST">
+            {% csrf_token %}
+            <label for="room_topic">Topic:</label>
+            <input required type="text" value="{{room.topic.name}}" name="topic" list="topic-list">
+            <datalist id="topic-list">
+                <select id="room_topic">
+                    {% for topic in topics %}
+                    <option value="{{topic.name}}">{{topic.name}}</option>
+                    {% endfor %}
+                </select>
+            </datalist>
+            <!-- {{field}} -->
+            <label for="room_name">Room name:</label>
+            {{form.name}}
+
+            <label for="room_description">Description:</label>
+            {{form.description}}
+            <!-- <input type="text" value="" placeholder="i.e. Best Anime Awards" name="room"> -->
+            <!-- <label for="">Topic:</label>
+            
+            <input type="password" value="" placeholder="i.e. Here we talk about best anime awards since 2000" name="password"> -->
+
+            <input class="btn bt-lg bg-dark text-light rounded-pill my-2" type="submit" role="button" value="Submit">
+        </form>
+        <p class="message"><a href="{{request.META.HTTP_REFERER}}">Cancel</a></p>
+    </div>
+</div>
+{% endblock %}

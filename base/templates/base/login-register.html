@@ -1,0 +1,120 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    /* body {
+        font-family: "Raleway", sans-serif;
+    } */
+
+    .login-page {
+        width: 368px;
+        margin: auto;
+    }
+
+    .login-page .form .login {
+        padding: 20px 0px;
+    }
+
+    .form {
+        position: relative;
+        text-align: center;
+        /* background: #FFFFFF; */
+        color: white;
+        background-color: #272640;
+        max-width: 360px;
+        margin: 0 auto 100px;
+        padding: 45px;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+
+    .form input {
+        outline: 0;
+        /* background: #f2f2f2; */
+        background-color: #1b3a4b;
+        color: white;
+        width: 100%;
+        border: 0;
+        margin: 0 0 15px;
+        padding: 15px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+    .form .message {
+        margin: 15px 0 0;
+        color: #b3b3b3;
+        font-size: 12px;
+    }
+
+    .form .message a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .form .message a:hover {
+        color: wheat;
+    }
+
+    .login-form label {
+        width: 100%;
+        text-align: left;
+        padding: 5px;
+    }
+
+</style>
+
+{% if page == 'login' %}
+<div class="login-page">
+    <div class="form">
+        <div class="login">
+            <div class="login-header">
+                <h3>LOGIN</h3>
+                <p>Please enter your credentials to login.</p>
+            </div>
+        </div>
+        <form class="login-form" method="POST">
+            {% csrf_token %}
+            <label for="">Email:</label>
+            <input type="text" name="email">
+
+            <label for="">Password:</label>
+            <input type="password" name="password">
+
+            <input class="btn bt-lg bg-dark text-light rounded-pill my-2" type="submit" role="button" value="Login">
+        </form>
+        <p class="message">Don't have an account? <a href="{% url 'register' %}">SignUp</a></p>
+    </div>
+</div>
+{% else %}
+<div class="login-page">
+    <div class="form">
+        <div class="login">
+            <div class="login-header">
+                <h3>Register</h3>
+                <p>Please enter your credentials to Register.</p>
+            </div>
+        </div>
+        <form class="login-form" action="" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+            <label for="">{{field.label}}:</label>
+            {{field}}
+            {% endfor %}
+            <input class="btn bt-lg bg-dark text-light rounded-pill my-2" type="submit" role="button" value="Register">
+        </form>
+        <p class="message">Already Registered? <a href="{% url 'login' %}">Login</a></p>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+<!-- 
+<div class="mx-3">
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Register">
+    </form>
+    Already have an account <a href="{% url 'login' %}">SignUp</a>
+</div> -->

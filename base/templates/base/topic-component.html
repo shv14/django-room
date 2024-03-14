@@ -1,0 +1,93 @@
+<style>
+    .text {
+        font-size: 1.1rem;
+        padding: 9px;
+        /* background-color: white; */
+        border-radius: 5px;
+        /* margin: 4px; */
+    }
+
+    .text a {
+        /* color: black; */
+        color: white;
+        text-decoration: none;
+    }
+
+    .text a:hover {
+        color: wheat;
+    }
+
+    hr {
+        margin: 0;
+        color: white;
+    }
+
+    .topic-content a span {
+        width: min-content;
+        /* background: darkgray; */
+        border: 1px solid white;
+        height: fit-content;
+        border-radius: 3px;
+    }
+
+    .topic-content a {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* .browse {
+        background: gray;
+    } */
+
+    .browse h3 {
+        color: wheat;
+        margin-bottom: .5rem;
+    }
+
+    .topic {
+        padding: 12px;
+    }
+
+    .topic-component {
+        background-color: #272640;
+        border-radius: 8px;
+    }
+
+    [class*="col-"] {
+        float: left;
+        padding: 15px;
+    }
+
+    @media (max-width: 1071px) {
+
+        /* For mobile phones: */
+        .text{
+            font-size: .8rem;
+        }
+    }
+</style>
+<div>
+    <div class="topic-component">
+        <div class="topic">
+            <div class="browse">
+                <h3>Browse Topics</h3>
+            </div>
+            <hr>
+            <div class="text-content">
+                <div class="text my-4">
+                    <div class="topic-content my-3 justify-content-between">
+                        <a href="{% url 'home' %}">All <span class="container m-0">{{topics.count}}</span></a>
+                    </div>
+                    {% for topic in topics %}
+                    <div class="my-3 topic-content">
+                        <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}} <span
+                                class="container m-0">{{topic.room_set.all.count}}</span> </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

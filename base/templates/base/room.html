@@ -1,0 +1,344 @@
+{% extends 'main.html' %}
+
+{% load static %}
+{% block content %}
+<style>
+    /* body {
+        font-family: "Raleway", sans-serif;
+    } */
+
+    .room-container {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        border-radius: 8px;
+    }
+
+    /* .room{
+        border: 2px solid black;
+    } */
+
+    .room-header {
+        align-items: center;
+    }
+
+    .room-header img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .header-1 {
+        align-items: center;
+    }
+
+    .header-1 a {
+        filter: invert(92%) sepia(6%) saturate(1804%) hue-rotate(336deg) brightness(102%) contrast(92%);
+        border-radius: 5px;
+    }
+
+    .header-1 h3 {
+        color: wheat;
+        margin: 0;
+        margin-left: 15px;
+    }
+
+    .room-details {
+        /* background-color: whitesmoke; */
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #1b3a4b;
+    }
+
+    .room-details h2 {
+        margin: 2px 0px;
+    }
+
+    .room-details .room-topic {
+        margin-top: 15px;
+        /* color: teal; */
+        color: wheat;
+        border: 1px solid;
+        border-radius: 50px;
+        width: fit-content;
+        padding: 2px 15px;
+        margin-bottom: 0px;
+    }
+
+    .user-content {
+        align-items: center;
+        margin: 2px 0px;
+    }
+
+    .user-content a {
+        font-size: 1rem;
+        /* margin: 5px; */
+        text-decoration: none;
+        /* color: teal; */
+        color: wheat;
+    }
+
+    .user-image {
+        align-items: center;
+    }
+
+    .user-image small {
+        margin: 0;
+        width: fit-content;
+        display: block;
+    }
+
+    .user-image img {
+        object-fit: cover;
+        margin-right: 6px;
+        width: 40px;
+        height: 39px;
+        border: 1px solid;
+        border-radius: 50%;
+    }
+
+    .user-message a {
+        color: wheat;
+        text-decoration: none;
+    }
+
+    .comment-line {
+        /* background-color: whitesmoke; */
+        background-color: #1b3a4b;
+        padding: 19px;
+        border-radius: 8px;
+    }
+
+    .room-core {
+        border-radius: 8px;
+        /* background: gray; */
+        background-color: #272640;
+        color: white;
+    }
+
+    .comment-form input {
+        width: 100%;
+        height: 48px;
+        outline: 0;
+        border: none;
+        color: white;
+        /* background-color: whitesmoke; */
+        background-color: #1b3a4b;
+        border-radius: 0 0 8px 8px;
+    }
+
+    .comments {
+        border-left: 1px solid white;
+        padding: 19px;
+    }
+
+    .room-comments {
+        border-radius: 8px 8px 0 0;
+        /* background: whitesmoke; */
+        background-color: #1b3a4b;
+    }
+
+    .participants {
+        /* background-color: gray; */
+        background-color: #272640;
+        color: white;
+        border-radius: 8px;
+    }
+
+    .participants-content {
+        /* background: whitesmoke; */
+        background-color: #1b3a4b;
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    .participants-content a {
+        color: teal;
+        text-decoration: none;
+    }
+
+    .activity-content small {
+        font-size: 12px;
+        position: relative;
+        top: -2px;
+    }
+
+    .activity-content a {
+        /* color: teal; */
+        color: wheat;
+        text-decoration: none;
+    }
+
+    .activity-content .message-1 {
+        font-size: .9rem;
+        /* color: teal; */
+        color: wheat;
+    }
+
+    .activity-content .message-2 {
+        font-size: .9rem;
+    }
+
+    .participants-content img {
+        object-fit: cover;
+        margin: 6px;
+        width: 40px;
+        height: 39px;
+        border: 1px solid;
+        border-radius: 50%;
+    }
+
+    .participants-detail {
+        margin: 12px 12px 12px 0px;
+        align-items: center;
+    }
+
+    .participants-header h3 {
+        color: wheat;
+    }
+
+    .user-comment {
+        margin-top: 10px;
+    }
+
+    .edit {
+        filter: invert(92%) sepia(6%) saturate(1804%) hue-rotate(336deg) brightness(102%) contrast(92%);
+        border-radius: 5px;
+    }
+
+    .edit .edit-1 {
+        margin-right: 9px;
+    }
+
+    .topic-activity {
+        display: none;
+    }
+
+
+    @media (max-width: 768px) {
+
+        .topic-activity {
+            display: block;
+        }
+
+        .topic-activity a {
+            display: block;
+            margin: 10px 20px;
+            padding: 8px;
+            text-decoration: none;
+            color: wheat;
+            border: 1px solid wheat;
+            border-radius: 50px;
+            width: 100px;
+            text-align: center;
+        }
+
+        .room-container {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+        }
+
+        .participants {
+            margin-top: 10px;
+        }
+    }
+</style>
+<div class="topic-activity">
+    <a href="#participants">Participants</a>
+</div>
+<div class="room-container mb-4" id="room">
+    <div class="room-core mx-3">
+        <div class="room p-3">
+            <div class="my-3">
+                <div class="room-header d-flex justify-content-between">
+                    <div class="header-1 d-flex">
+                        <a href="{% url 'home' %}"><img src="{% static 'images/left-arrow.png' %}" alt=""></a>
+                        <h3>Room</h3>
+                        <!-- <p class="mx-2">{{room.name}}</p> -->
+                    </div>
+                    {% if request.user == room.host %}
+                    <div class="edit">
+                        <a class="edit-1" href="{% url 'update-room' room.id %}"><img
+                                src="{% static 'images/edit-text.png' %}" alt=""></a>
+                        <a href="{% url 'delete-room' room.id %}"> <img src="{% static 'images/delete.png' %}" alt="">
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+                <hr>
+                <div class="room-user-content">
+                    <div class="room-details">
+                        <h2>{{room.name}}</h2>
+                        <p class="">hosted by</p>
+                        <div class="d-flex user-content justify-content-flext-start">
+                            <div class="user-image b-dark border-dark">
+                                <img src="{{room.host.avatar.url}}" alt="">
+                            </div>
+                            <a href="{% url 'user' room.host.id %}">@{{room.host.username}}</a>
+                        </div>
+                        <p class="room-topic">{{room.topic}}</p>
+                    </div>
+                    <div class="comment mt-3">
+                        <div class="room-comments">
+                            {% for message in messages %}
+                            <div class="comment-line">
+                                <div class="comments">
+                                    <div class="user-image user-message d-flex">
+                                        <img src="{{message.user.avatar.url}}" alt="">
+                                        <div>
+                                            <a href="{% url 'user' message.user.id %}">@{{ message.user.name }}</a>
+                                            <small> {{ message.created|timesince }} ago</small>
+                                        </div>
+                                    </div>
+                                    <div class="user-comment">
+                                        <p>{{message.body}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    {% if request.user.is_authenticated %}
+                    <div class="comment-form">
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <input class="p-3" type="text" name="body" placeholder="Comment">
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="participants mx-3" id="participants">
+        <div class="p-3">
+            <div class="my-3">
+                <div class="participants-header">
+                    <h3>Participants</h3>
+                </div>
+                <hr>
+                <div class="participants-content">
+                    <div class="my-3">
+                        {% for user in participants %}
+                        <!-- <a href="{% url 'user' user.id %}"><p>@{{user.username}}</p></a> -->
+                        <div class="d-flex participants-detail">
+                            <img src="{{user.avatar.url}}" alt="">
+                            <div class="activity-content">
+                                <p class="message-2 m-0 "><span class="m-0">{{user.name}}</span> </p>
+                                <p class="message-1 m-0">@<a href="{% url 'user' user.id %}">{{ user.username }}</a></p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="topic-activity">
+    <a href="#room">Go Up</a>
+</div>
+
+
+{% endblock %}

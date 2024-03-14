@@ -1,0 +1,89 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    .home-container {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        /* grid-template-columns: repeat(auto-fit, minmax(250px, 2fr)); */
+    }
+
+    .home-activity {
+        margin-right: 10px;
+    }
+
+    .home-feed {
+        margin: 0px 20px;
+    }
+
+    .home-topic {
+        margin-left: 10px;
+        border-radius: 8px;
+        /* background: gray; */
+    }
+
+    .topic-activity {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+
+        .home-topic {
+            display: none;
+        }
+
+        .home-activity {
+            display: none;
+        }
+
+        .home-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topic-activity {
+            display: flex;
+            margin: 10px;
+            justify-content: center;
+            /* align-items: center; */
+            overflow-x: scroll;
+            flex-wrap: wrap;
+            flex-direction: column;
+        }
+
+        /* .topic-activity p {
+            margin: 10px;
+            padding: 8px;
+            text-decoration: none;
+            color: wheat;
+            border: 1px solid wheat;
+            border-radius: 50px;
+            width: 100px;
+            text-align: center;
+        } */
+
+        .home-feed {
+            margin: 20px;
+        }
+
+    }
+</style>
+<div class="home-container">
+    <div class="topic-activity">
+        <!-- <a href="{% url 'topic' %}">Topics</a> -->
+        {% include 'base/topic.html' %}
+        <!-- <a href="">Activity</a> -->
+    </div>
+    <div class="home-topic">
+        {% include 'base/topic-component.html' %}
+    </div>
+    <div class="home-feed">
+        {% include 'base/feed-component.html' %}
+    </div>
+    <div class="home-activity">
+        {% include 'base/activity-component.html' %}
+    </div>
+</div>
+
+{% endblock %}

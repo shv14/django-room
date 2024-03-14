@@ -1,0 +1,168 @@
+{% load static %}
+
+<style>
+    #image {
+        width: 30px;
+        height: 30px;
+        filter: invert(92%) sepia(7%) saturate(1804%) hue-rotate(336deg) brightness(105%) contrast(90%);
+        border-radius: 50%;
+    }
+
+    .user-content {
+        align-items: center;
+    }
+
+    .user-content a {
+        font-size: 1rem;
+        margin: 5px;
+        text-decoration: none;
+        /* color: teal; */
+        color: wheat;
+    }
+
+    .user-image img {
+        object-fit: cover;
+        margin: 6px;
+        width: 40px;
+        height: 39px;
+        border: 1px solid wheat;
+        border-radius: 50%;
+    }
+
+    .room-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .room-content a {
+        font-size: 1.3rem;
+        text-decoration: none;
+        /* color: black; */
+        color: white;
+    }
+
+    .room-content a:hover {
+        color: wheat;
+    }
+
+    .room {
+        border-radius: 8px;
+        padding: 5px;
+        /* background: whitesmoke; */
+        background-color: #1b3a4b;
+    }
+
+    .room-footer {
+        margin: 10px 0px;
+    }
+
+    .room-foot p {
+        margin-bottom: 0;
+    }
+
+    .room-footer img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .room-footer .room-topic {
+        align-self: center;
+        margin: 0;
+    }
+
+    .room-header span {
+        font-size: small;
+    }
+
+    .feed {
+        padding: 12px;
+        /* background-color: gray; */
+        background-color: #272640;
+        color: white;
+        border-radius: 8px;
+    }
+
+    .timesince {
+        color: wheat;
+    }
+
+    .browse h3{
+        color: wheat;
+    }
+
+    @media (max-width: 500px) {
+
+        .timesince {
+            overflow: scroll;
+            width: 100px;
+        }
+
+        .timesince span {
+            display: block;
+            width: 147px;
+        }
+
+        .room-footer .room-topic {
+            max-width: max-content;
+        }
+
+        .room-foot {
+            margin-right: 50px;
+        }
+
+        .room-footer {
+            margin: 10px 0px;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            max-height: 25px;
+            flex-wrap: wrap;
+            flex-direction: column;
+        }
+
+
+    }
+</style>
+
+<div>
+    <div class="feed">
+        <div class="browse d-flex my-0 justify-content-between">
+            <h3>Rooms({{rc}})</h3>
+            <a href="{% url 'create-room' %}"><img id="image" src="{% static 'images/plus.png' %}" alt=""></a>
+        </div>
+        <hr>
+        <div class="my-4">
+            {% for room in rooms %}
+            <div class="my-3 room">
+                <div class="room-header">
+                    <div class="d-flex user-content justify-content-flext-start">
+                        <div class="user-image b-dark border-dark">
+                            <img src="{{room.host.avatar.url}}" alt="">
+                        </div>
+                        <a href="{% url 'user' room.host.id %}">@{{room.host.username}}</a>
+                    </div>
+                    <div class="timesince mx-2">
+                        <span>{{room.created|timesince}} ago</span>
+                    </div>
+                </div>
+                <div class="room-content mx-2">
+                    <a href="{% url 'room' room.id %}">{{room.name}}</a>
+                    <p>{{room.description}}</p>
+                </div>
+                <hr class="mx-2">
+                <div class="mx-2 room-footer d-flex justify-content-between">
+                    <div class="room-foot d-flex">
+                        <img src="{% static 'images/people.png' %}" alt="">
+                        <p class="mx-2">{{room.participants.all.count}} Joined</p>
+                    </div>
+                    <p class="room-topic">{{room.topic}}</p>
+                </div>
+                <!-- {% if request.user == room.host %}
+                        <a href="{% url 'update-room' room.id %}"> Update </a> 
+                        <a href="{% url 'delete-room' room.id %}"> Delete </a>
+                    {% endif %} -->
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

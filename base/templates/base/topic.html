@@ -1,0 +1,104 @@
+<style>
+    /* .text {
+        font-size: 1.1rem;
+        padding: 9px;
+        background-color: white;
+        border-radius: 5px;
+    }
+
+    .text a {
+        color: black;
+        text-decoration: none;
+    }
+
+    .text a:hover {
+        color: wheat;
+    }
+
+    hr {
+        margin: 0;
+    }
+
+    .topic-content a span {
+        width: min-content;
+        background: darkgray;
+        height: fit-content;
+        border-radius: 3px;
+    }
+
+    .topic-content a {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .browse {
+        background: gray;
+    }
+
+    .browse h3 {
+        margin-bottom: .5rem;
+    }
+
+    .topic {
+        padding: 12px;
+    }
+
+    .topic-component {
+        background-color: gray;
+        border-radius: 8px;
+    }
+
+    [class*="col-"] {
+        float: left;
+        padding: 15px;
+    }
+
+    @media (max-width: 1071px) {
+
+        .text {
+            font-size: .8rem;
+        }
+    } */
+
+    .parent {
+        list-style-type: none;
+        display: flex;
+        margin: 10px;
+
+    }
+
+    .child {
+        margin: 0 10px;
+    }
+
+    .child a {
+        color: wheat;
+        padding: 10px;
+        border: 1px solid wheat;
+        border-radius: 50px;
+        text-decoration: none;
+    }
+
+    .parent-ul {
+        margin: 10px 0px;
+        width: max-content;
+        display: flex;
+        list-style-type: none;
+        padding: 0;
+    }
+</style>
+<ul class="parent-ul">
+    <li class="child">
+        <a href="{% url 'home' %}">All <span class="container m-0">{{topics.count}}</span></a>
+    </li>
+    {% for topic in topics %}
+    <li class="child">
+        <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}
+            <span class="container m-0">{{topic.room_set.all.count}}
+            </span>
+        </a>
+    </li>
+    {% endfor %}
+</ul>

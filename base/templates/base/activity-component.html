@@ -1,0 +1,100 @@
+{% load static %}
+
+<style>
+    .activity-list {
+        padding: 2px;
+        /* border-radius: 7px; */
+        min-height: 142px;
+        /* background: whitesmoke; */
+        padding: 10px;
+    }
+
+    .activity-list img {
+        object-fit: cover;
+        margin: 6px;
+        width: 40px;
+        height: 39px;
+        border: 1px solid wheat;
+        border-radius: 50%;
+    }
+
+    .activity-content small {
+        font-size: 12px;
+        position: relative;
+        top: -2px;
+    }
+
+    .activity-content a {
+        /* color: teal; */
+        color: wheat;
+        text-decoration: none;
+    }
+
+    .activity-content .message-1 {
+        /* color: teal; */
+        color: wheat;
+    }
+
+    .activity-content .message-2 {
+        font-size: 15px;
+    }
+
+    .comment {
+        /* background-color: DarkGray; */
+        background: #1b3a4b;
+        border-radius: 6px;
+        margin: 0px 10px;
+    }
+
+    .comment p {
+        margin: 0;
+    }
+
+    .activity-component {
+        /* background-color: gray; */
+        background-color: #272640;
+        color: white;
+        border-radius: 8px;
+    }
+
+    .activity {
+        padding: 12px;
+        margin-bottom: 10px;
+    }
+
+    .browse h3{
+        color: wheat;
+    }
+
+</style>
+
+<div>
+    <div class="activity-component">
+        <div class="activity">
+            <div class="browse">
+                <h3>Recent Activity</h3>
+            </div>
+            <hr>
+            <div class="my-4">
+                {% for message in messages %}
+                <div class="activity-list my-3">
+                    <div class="user-list">
+                        <div class="d-flex">
+                            <img src="{{message.user.avatar.url}}" alt="">
+                            <div class="activity-content">
+                                <p class="message-1 m-0">@<a href="{% url 'user' message.user.id %}">{{message.user.username }}</a></p>
+                                <small>{{message.created|timesince}} ago</small>
+                                <p class="message-2">replied to post <span
+                                        class=" m-0 message-1">"{{message.room.name}}"</span> </p>
+                            </div>
+                        </div>
+                        <div class="comment p-2">
+                            <p>{{message}}...</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
